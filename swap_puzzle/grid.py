@@ -3,7 +3,7 @@ This is the grid module. It contains the Grid class and its associated methods.
 """
 
 import random
-
+import matplotlib.pyplot as plt
 class Grid():
     """
     A class representing the grid from the swap puzzle. It supports rectangular grids. 
@@ -118,8 +118,42 @@ class Grid():
                 initial_state[i_line] = line_state
             grid = Grid(m, n, initial_state)
         return grid
-        """
-    def swap(cls, )
+
+
 """
+    def quadri(self):
+
+        #coloriage gris clair
+        fig = plt.figure(1)
+        ax = fig.add_subplot(1,1,1)
+        for i in range(-1, self.n-1): #ligne inf
+            xy=(i,-1)
+            w=1
+            h=1
+            rect = plt.Rectangle(xy, w, h, color="gray")
+            ax.add_patch(rect)
+
+        for i in range(-1, self.n-1): #ligne sup
+            xy=(i,self.n-2)
+            w=1
+            h=1
+            rect = plt.Rectangle(xy, w, h, color="gray")
+            ax.add_patch(rect)
+
+        for j in range(-1, self.m-1): #colone gauche
+            xy=(-1,j)
+            w=1
+            h=1
+            rect = plt.Rectangle(xy, w, h, color="gray")
+            ax.add_patch(rect)
+
+        for j in range(-1, self.m -1): #colone droite
+            xy=(self.m-2,j)
+            w=1
+            h=1
+            rect = plt.Rectangle(xy, w, h, color="gray")
+            ax.add_patch(rect)
+"""
+   
 
 

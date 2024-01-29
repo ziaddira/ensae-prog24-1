@@ -46,7 +46,52 @@ class Solver(Grid):
         return L_swap
 
 
-        # TODO: implement this function (and remove the line "raise NotImplementedError").
-        # NOTE: you can add other methods and subclasses as much as necessary. The only thing imposed is the format of the solution returned.
-        raise NotImplementedError
+    def transfo(self, T):
+        """Transform an impossible swap in a sequence of possible swaps
+
+         Args:
+         T (_type_): tuple of two points (point = (i, j))
+        """
+        (i,j) = T[0]
+        L = []
+        while i != T[1][0]:
+            if i > T[1][0]:
+                L.append(((i,j), (i-1, j)))
+                i = i - 1
+            else:
+                L.append(((i,j), (i+1, j)))
+                i = i + 1
+        while j != T[1][1]: 
+            if j > T[1][1]:
+                L.append(((i, j), (i, j-1)))
+                j = j - 1
+            else:
+                L.append(((i, j), (i, j+1))) 
+                j = j + 1
+        L_f = L[:]   
+       
+        for k in range(1, len(L)):
+            L_f.append(L[len(L)-1-k])
+         
+        return L_f
+
+    def transfo_seq(self, L):
+        """Transform a list of impossible swaps in a list of possible swaps
+
+        Args:
+                L (list): list of tuple [((i1, j1), (i2, j2)), ((i1', j1'), (i2', j2')), ...]. 
+
+        Returns:
+                L_s (list): list of tuple [((i1, j1), (i2, j2)), ((i1', j1'), (i2', j2')), ...]. 
+        """
+        L_s = []
+        for i in L:
+            L_s = L_s + self.transfo(i)
+        return L_s
+
+    def get_solution_f(self):
+        L = self.get_solution()
+        L_f = self.transfo_seq(L)
+        return L_f
+        
 

@@ -53,6 +53,7 @@ class Graph:
         """
         Returns a representation of the graph with number of nodes and edges.
         """
+
         return f"<graph.Graph: nb_nodes={self.nb_nodes}, nb_edges={self.nb_edges}>"
 
     def add_edge(self, node1, node2):
@@ -81,6 +82,12 @@ class Graph:
         self.nb_edges += 1
         self.edges.append((node1, node2))
 
+    def enfiler(self, L, s):
+        return [s] + L
+
+
+
+
     def bfs(self, src, dst): 
         """
         Finds a shortest path from src to dst by BFS.  
@@ -96,9 +103,34 @@ class Graph:
         -------
         path: list[NodeType] | None
             The shortest path from src to dst. Returns None if dst is not reachable from src
-        """ 
-        # TODO: implement this function (and remove the line "raise NotImplementedError").
-        raise NotImplementedError
+        """
+        
+        L = [] 
+        L.append(src)
+        M = []
+        d = dict()
+        for i in range(len(self.nodes)):
+            d[i] = []
+        while len(L)>0 :
+            s = L.pop()
+            M.append(s)
+            for i in self.nodes:
+                
+                if (i, s) in self.edges or (s, i) in self.edges:
+                    if i not in M:
+                        L = self.enfiler(L, i)
+                        d[s].append(i)
+          
+        return d
+
+    def pcc(self, src, dst):
+        d = self.bfs(src, dst)
+        a = 0
+        while dst not in d[a]:
+            a = a+1
+    
+        
+
 
     @classmethod
     def graph_from_file(cls, file_name):
