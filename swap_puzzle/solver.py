@@ -1,4 +1,6 @@
 from grid import Grid
+from graph import Graph
+from itertools import permutations
 
 class Solver(Grid): 
     """
@@ -93,5 +95,15 @@ class Solver(Grid):
         L = self.get_solution()
         L_f = self.transfo_seq(L)
         return L_f
+
+    def possibilities(self):
+        n,m = self.n, self.m
+        A = n*m
+        L = list(permutations(range(1, A+1), A))
+        g = Graph()
+        L_hash = []
+        for i in L:
+            L_hash.append(hash(i))
+        g.nodes = L_hash
         
 

@@ -2,6 +2,9 @@ import matplotlib.pyplot as plt
 from grid import Grid
 from solver import Solver
 from graph import Graph
+
+from itertools import permutations
+
 """
 g = Grid(2, 3)
 print(g)
@@ -33,5 +36,7 @@ for i in range(9):
     g.add_edge(i, i+1)
 
 print(g)
-print(g.bfs(0, 9))
 
+print(g.bfs(0, 9))
+L = list(permutations(range(1, 7), 6))
+print(L)

@@ -109,25 +109,29 @@ class Graph:
         L.append(src)
         M = []
         d = dict()
-        for i in range(len(self.nodes)):
+        for i in self.nodes:
             d[i] = []
-        while len(L)>0 :
+        #exploration du graphe
+        while dst not in M:
             s = L.pop()
             M.append(s)
             for i in self.nodes:
-                
                 if (i, s) in self.edges or (s, i) in self.edges:
                     if i not in M:
                         L = self.enfiler(L, i)
                         d[s].append(i)
+        
+        C = [dst]
+        while C[0] != src:
+            for i in d.keys():
+                if C[0] in d[i]:
+                    C = [i] + C
+                                
+        return C
+    
+        
           
-        return d
-
-    def pcc(self, src, dst):
-        d = self.bfs(src, dst)
-        a = 0
-        while dst not in d[a]:
-            a = a+1
+        
     
         
 
