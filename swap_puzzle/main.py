@@ -39,4 +39,23 @@ print(g)
 
 print(g.bfs(0, 9))
 L = list(permutations(range(1, 7), 6))
-print(L)
+print(L) 
+
+def hash1(t):
+    res=""
+    for i in range(len(t)):
+        res = res + str(t[i])
+    return int(res)
+
+print(hash1((1,2,3)))
+
+def hash2(n):
+    a = str(n)
+    b = len(a)
+    t = []
+    for i in range(b):
+        t.append(int(a[i]))
+    return tuple(t)
+
+print(hash2(123))
+
